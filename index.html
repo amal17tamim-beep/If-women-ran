@@ -12,24 +12,23 @@
 
 ```
 :root {
-  --ink: #1c1917;
-  --ink-light: #44403c;
-  --ink-muted: #78716c;
-  --page: #fffdf9;
-  --warm: #fdf6ec;
-  --hero-bg: #1c1410;
-  --hero-text: #f7f0e6;
-  --accent: #9a6a3f;
-  --accent-bright: #c4864d;
-  --accent-pale: #f0e0cc;
-  --rule: #e5ddd4;
-  --block-bg: #2a1f15;
+  --bg:        #f5f0e8;
+  --bg-warm:   #ede6d6;
+  --bg-deeper: #e0d5c0;
+  --ink:       #2c2417;
+  --ink-mid:   #5a4e3a;
+  --ink-soft:  #8a7d68;
+  --accent:    #7a5c38;
+  --accent-mid:#a07848;
+  --rule:      #d4c9b0;
+  --hero-bg:   #d9cdb8;
+  --hero-ink:  #1e180f;
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--page);
+  background: var(--bg);
   color: var(--ink);
   font-family: 'Cormorant Garamond', Georgia, serif;
   -webkit-font-smoothing: antialiased;
@@ -39,7 +38,7 @@ body {
 /* PROGRESS */
 #progress {
   position: fixed; top: 0; left: 0; height: 3px;
-  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-bright) 100%);
+  background: var(--accent-mid);
   width: 0%; z-index: 200; transition: width 0.1s linear;
 }
 
@@ -48,81 +47,80 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
   padding: 15px 20px;
-  background: rgba(255,253,249,0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(245,240,232,0.97);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
   transition: border-color 0.4s;
 }
 nav.scrolled { border-color: var(--rule); }
 .nav-brand {
   font-family: 'Cormorant SC', serif;
-  font-size: 12px; letter-spacing: 0.2em; color: var(--ink-muted);
+  font-size: 12px; letter-spacing: 0.2em; color: var(--ink-soft);
 }
 .nav-title {
   font-family: 'DM Sans', sans-serif;
   font-size: 10px; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--ink-muted);
+  text-transform: uppercase; color: var(--ink-soft);
   opacity: 0; transition: opacity 0.4s;
 }
 nav.scrolled .nav-title { opacity: 1; }
 
-/* HERO — guaranteed dark */
+/* HERO — light warm beige */
 .hero {
   min-height: 100svh;
-  background-color: #1c1410;
-  background-image:
-    radial-gradient(ellipse 120% 70% at 85% 15%, rgba(196,134,77,0.22) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 90% at 5% 95%, rgba(154,106,63,0.14) 0%, transparent 50%);
+  background-color: #d9cdb8;
   display: flex; flex-direction: column;
   justify-content: flex-end;
   padding: 80px 24px 52px;
   position: relative; overflow: hidden;
 }
-
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 100% 60% at 90% 10%, rgba(160,120,72,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 80% at 0% 100%, rgba(122,92,56,0.12) 0%, transparent 55%);
+}
 .hero-content { position: relative; z-index: 1; }
 
 .hero-eyebrow {
   font-family: 'DM Sans', sans-serif;
   font-size: 10px; letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--accent-bright);
+  text-transform: uppercase; color: var(--accent);
   margin-bottom: 18px;
   opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
 }
-
 .hero h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(54px, 15vw, 86px);
+  font-size: clamp(52px, 14vw, 84px);
   font-weight: 300; line-height: 0.96;
   letter-spacing: -0.015em;
-  color: #f7f0e6;
+  color: var(--hero-ink);
   margin-bottom: 18px;
   opacity: 0; animation: fadeUp 1s ease forwards 0.55s;
 }
-.hero h1 em { font-style: italic; color: var(--accent-bright); }
+.hero h1 em { font-style: italic; color: var(--accent); }
 
 .hero-subtitle {
   font-family: 'Cormorant Garamond', serif;
   font-size: 17px; font-weight: 300; font-style: italic;
-  color: rgba(247,240,230,0.52);
-  line-height: 1.55; margin-bottom: 40px;
+  color: var(--ink-mid); line-height: 1.55; margin-bottom: 40px;
   opacity: 0; animation: fadeUp 1s ease forwards 0.7s;
 }
-
 .hero-meta {
   display: flex;
-  border-top: 1px solid rgba(247,240,230,0.12);
+  border-top: 1px solid rgba(44,36,23,0.15);
   padding-top: 20px;
   opacity: 0; animation: fadeUp 1s ease forwards 0.85s;
 }
 .hero-meta-item {
   font-family: 'DM Sans', sans-serif;
-  font-size: 10px; color: rgba(247,240,230,0.32);
+  font-size: 10px; color: var(--ink-mid);
   letter-spacing: 0.06em; flex: 1; line-height: 1.4;
 }
 .hero-meta-item + .hero-meta-item {
-  border-left: 1px solid rgba(247,240,230,0.1);
+  border-left: 1px solid rgba(44,36,23,0.15);
   padding-left: 14px;
 }
 
@@ -134,8 +132,8 @@ article {
 
 /* AUTHOR NOTE */
 .authors-note {
-  background: var(--warm);
-  border-left: 3px solid var(--accent);
+  background: var(--bg-warm);
+  border-left: 3px solid var(--accent-mid);
   padding: 26px 22px; margin-bottom: 56px;
   opacity: 0; transform: translateY(20px);
   transition: opacity 0.7s, transform 0.7s;
@@ -148,12 +146,12 @@ article {
   color: var(--accent); margin-bottom: 14px;
 }
 .authors-note p {
-  font-size: 17px; line-height: 1.78;
-  color: var(--ink-light); margin-bottom: 14px;
+  font-size: 17px; line-height: 1.8;
+  color: var(--ink-mid); margin-bottom: 14px;
 }
 .authors-note p:last-child { margin-bottom: 0; }
 
-/* SECTION */
+/* SECTIONS */
 .section {
   margin-bottom: 64px;
   opacity: 0; transform: translateY(26px);
@@ -167,13 +165,13 @@ article {
 }
 .section-num {
   font-family: 'Cormorant SC', serif;
-  font-size: 11px; color: var(--accent-bright);
+  font-size: 11px; color: var(--accent-mid);
   letter-spacing: 0.15em;
 }
 .section-lbl {
   font-family: 'DM Sans', sans-serif;
   font-size: 9px; letter-spacing: 0.22em;
-  text-transform: uppercase; color: var(--ink-muted);
+  text-transform: uppercase; color: var(--ink-soft);
 }
 .section-rule { flex: 1; height: 1px; background: var(--rule); }
 
@@ -188,15 +186,15 @@ h2 em { font-style: italic; color: var(--accent); }
 h3 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 21px; font-weight: 400; font-style: italic;
-  color: var(--ink-light);
+  color: var(--ink-mid);
   margin: 40px 0 16px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--rule);
 }
 
 p {
-  font-size: 18px; line-height: 1.85;
-  color: var(--ink); margin-bottom: 20px;
+  font-size: 18px; line-height: 1.88;
+  color: var(--ink); margin-bottom: 22px;
 }
 p:last-child { margin-bottom: 0; }
 
@@ -207,30 +205,31 @@ p:last-child { margin-bottom: 0; }
   color: var(--accent);
 }
 
-/* PULL QUOTE — dark block */
+/* PULL QUOTE — warm deeper beige, dark text */
 .pull-quote {
-  margin: 44px 0; padding: 32px 22px 28px;
-  background-color: #2a1f15;
-  border-left: none; position: relative;
+  margin: 44px 0; padding: 30px 22px 26px;
+  background: var(--bg-deeper);
+  border-left: 3px solid var(--accent-mid);
+  position: relative;
   opacity: 0; transform: translateY(20px);
   transition: opacity 0.7s, transform 0.7s;
 }
 .pull-quote.visible { opacity: 1; transform: none; }
 .pull-quote::before {
   content: '\201C';
-  position: absolute; top: 4px; left: 18px;
+  position: absolute; top: 2px; left: 16px;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 64px; line-height: 1;
-  color: var(--accent-bright); opacity: 0.4;
+  font-size: 60px; line-height: 1;
+  color: var(--accent-mid); opacity: 0.35;
 }
 .pull-quote p {
   font-size: 20px; font-weight: 300; font-style: italic;
-  line-height: 1.52; color: #f0e8dc; margin-bottom: 14px;
+  line-height: 1.55; color: var(--ink); margin-bottom: 14px;
 }
 .pull-quote cite {
   font-family: 'DM Sans', sans-serif;
   font-size: 10px; letter-spacing: 0.12em;
-  color: var(--accent-bright); font-style: normal;
+  color: var(--accent); font-style: normal;
 }
 
 /* STATS */
@@ -242,7 +241,7 @@ p:last-child { margin-bottom: 0; }
   transition: opacity 0.7s, transform 0.7s;
 }
 .stat-grid.visible { opacity: 1; transform: none; }
-.stat-item { background: var(--page); padding: 22px 18px; }
+.stat-item { background: var(--bg); padding: 22px 18px; }
 .stat-number {
   font-family: 'Cormorant Garamond', serif;
   font-size: 40px; font-weight: 300;
@@ -250,7 +249,7 @@ p:last-child { margin-bottom: 0; }
 }
 .stat-label {
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px; color: var(--ink-muted); line-height: 1.55;
+  font-size: 11px; color: var(--ink-soft); line-height: 1.55;
 }
 
 /* DIVIDER */
@@ -266,13 +265,16 @@ p:last-child { margin-bottom: 0; }
 }
 .divider-mark {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 18px; color: var(--accent-bright);
+  font-size: 18px; color: var(--accent-mid);
 }
 
 /* CLOSING QUOTE */
 .closing-quote {
   margin: 44px 0 0; padding: 36px 22px;
-  background-color: #2a1f15; text-align: center;
+  background: var(--bg-deeper);
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  text-align: center;
   opacity: 0; transform: translateY(20px);
   transition: opacity 0.7s, transform 0.7s;
 }
@@ -280,9 +282,9 @@ p:last-child { margin-bottom: 0; }
 .closing-quote p {
   font-size: clamp(22px, 6vw, 32px);
   font-weight: 300; font-style: italic;
-  line-height: 1.45; color: #f0e8dc; margin-bottom: 0;
+  line-height: 1.45; color: var(--ink); margin-bottom: 0;
 }
-.closing-quote p em { color: var(--accent-bright); font-style: normal; }
+.closing-quote p em { color: var(--accent); font-style: normal; font-weight: 400; }
 
 /* SOURCES */
 .sources {
@@ -296,12 +298,12 @@ p:last-child { margin-bottom: 0; }
   font-family: 'DM Sans', sans-serif;
   font-size: 9px; font-weight: 500;
   letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--ink-muted); margin-bottom: 18px;
+  color: var(--ink-soft); margin-bottom: 18px;
 }
 .sources ol { padding-left: 18px; }
 .sources li {
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px; color: var(--ink-muted);
+  font-size: 12px; color: var(--ink-soft);
   line-height: 1.65; margin-bottom: 9px;
 }
 
@@ -312,12 +314,12 @@ footer {
 }
 footer p {
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px; color: var(--ink-muted);
+  font-size: 11px; color: var(--ink-soft);
   letter-spacing: 0.05em; margin-bottom: 0;
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -342,8 +344,6 @@ footer p {
   <span class="nav-title">If Women Ran the World</span>
 </nav>
 
-<!-- HERO -->
-
 <section class="hero">
   <div class="hero-content">
     <p class="hero-eyebrow">A Personal Essay</p>
@@ -357,8 +357,6 @@ footer p {
   </div>
 </section>
 
-<!-- ARTICLE -->
-
 <article>
 
   <div class="authors-note">
@@ -366,8 +364,6 @@ footer p {
     <p>I want to be honest about where this came from. I was watching the news — the missiles, the rhetoric, the posturing between Israel, Iran, and the United States — and something in me snapped quietly. Not with rage, but with a kind of exhausted clarity.</p>
     <p>I found myself thinking: we have tried this way, the way of dominance and deterrence and who-blinks-first, for a very long time now. And I started wondering, with genuine curiosity rather than naivety, what the alternative might actually look like. Not as a fantasy. As a serious question. This is my attempt to answer it honestly — which means celebrating what the evidence supports and confronting what it doesn't.</p>
   </div>
-
-  <!-- I -->
 
   <section class="section">
     <div class="section-meta">
@@ -389,8 +385,6 @@ footer p {
 
   <div class="divider"><span class="divider-mark">✦</span></div>
 
-  <!-- II -->
-
   <section class="section">
     <div class="section-meta">
       <span class="section-num">II</span>
@@ -409,11 +403,11 @@ footer p {
       </div>
       <div class="stat-item">
         <div class="stat-number">~95%</div>
-        <div class="stat-label">Of human history spent in hunter-gatherer bands — significantly more gender-equal than agricultural societies</div>
+        <div class="stat-label">Of human history in hunter-gatherer bands — significantly more gender-equal than agricultural societies</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">3+</div>
-        <div class="stat-label">Major matrilineal societies functioning today: Minangkabau, Mosuo, Khasi — plus dozens more worldwide</div>
+        <div class="stat-label">Major matrilineal societies today: Minangkabau, Mosuo, Khasi — plus dozens more worldwide</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">2021</div>
@@ -424,8 +418,6 @@ footer p {
   </section>
 
   <div class="divider"><span class="divider-mark">✦</span></div>
-
-  <!-- III -->
 
   <section class="section">
     <div class="section-meta">
@@ -451,8 +443,6 @@ footer p {
 
   <div class="divider"><span class="divider-mark">✦</span></div>
 
-  <!-- IV -->
-
   <section class="section">
     <div class="section-meta">
       <span class="section-num">IV</span>
@@ -470,8 +460,6 @@ footer p {
   </section>
 
   <div class="divider"><span class="divider-mark">✦</span></div>
-
-  <!-- V -->
 
   <section class="section">
     <div class="section-meta">
@@ -493,8 +481,6 @@ footer p {
 
   <div class="divider"><span class="divider-mark">✦</span></div>
 
-  <!-- VI -->
-
   <section class="section">
     <div class="section-meta">
       <span class="section-num">VI</span>
@@ -507,7 +493,7 @@ footer p {
     <p>The evidence consistently points toward a different set of organizing principles — distributed authority, long-term thinking, care as a genuine political priority, emotional intelligence as a strategic asset. Not because women are morally superior. But because these values have been systematically excluded from the rooms where decisions get made, and their absence has costs we are all now paying.</p>
     <p>What I took from my childhood was not that girls are better than boys. What I took was that one way of organizing a group produces more stability, more genuine participation, and more durable outcomes than the other. The girl group I helped build was not perfect. But when someone new arrived, we found a place for them. When someone went quiet, we noticed. And we were still friends at the end of the afternoon.</p>
     <div class="closing-quote">
-      <p>"That seems worth building toward —<br><em>at any scale.</em>"</p>
+      <p>"That seems worth building toward — <em>at any scale.</em>"</p>
     </div>
   </section>
 
@@ -536,7 +522,6 @@ footer p {
 <script>
   const progress = document.getElementById('progress');
   const nav = document.getElementById('nav');
-
   window.addEventListener('scroll', () => {
     const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
     progress.style.width = pct + '%';
